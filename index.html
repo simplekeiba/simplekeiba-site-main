@@ -1830,6 +1830,19 @@
             }
         }
 
+        // 強制更新機能（スマホ対応）
+        function forceRefreshPrediction() {
+            // ローカルストレージをクリアしてから再読み込み
+            const savedData = localStorage.getItem('predictionData');
+            if (savedData) {
+                localStorage.removeItem('predictionData');
+                setTimeout(() => {
+                    localStorage.setItem('predictionData', savedData);
+                    loadPredictionData();
+                }, 100);
+            }
+        }
+
         // ページ読み込み時に予想データを読み込み
         window.addEventListener('load', loadPredictionData);
         
@@ -1842,6 +1855,50 @@
                 loadPredictionData();
             }
         });
+
+        // タッチイベントでも更新（スマホ対応）
+        document.addEventListener('touchstart', function() {
+            setTimeout(loadPredictionData, 100);
+        });
+
+        // スクロール時にも更新（スマホ対応）
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(loadPredictionData, 200);
+        });
+
+        // 定期的な更新（スマホ対応）
+        setInterval(loadPredictionData, 5000);
+
+        // 手動更新ボタンを追加（スマホ対応）
+        const predictionSection = document.querySelector('.prediction-section');
+        if (predictionSection) {
+            const refreshButton = document.createElement('button');
+            refreshButton.textContent = '🔄 更新';
+            refreshButton.style.cssText = `
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: #D4AF37;
+                color: #000;
+                border: none;
+                border-radius: 5px;
+                padding: 5px 10px;
+                font-size: 0.8rem;
+                cursor: pointer;
+                z-index: 10;
+            `;
+            refreshButton.addEventListener('click', function() {
+                forceRefreshPrediction();
+                this.textContent = '✅ 更新済み';
+                setTimeout(() => {
+                    this.textContent = '🔄 更新';
+                }, 2000);
+            });
+            predictionSection.style.position = 'relative';
+            predictionSection.appendChild(refreshButton);
+        }
 
 
     </script>
