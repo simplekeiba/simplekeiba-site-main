@@ -80,27 +80,83 @@
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
         .mark-btn {
-            padding: 8px 15px;
+            padding: 10px 20px;
             background: #333;
-            border: 1px solid #555;
-            border-radius: 5px;
+            border: 2px solid #555;
+            border-radius: 8px;
             color: #fff;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            min-width: 80px;
         }
 
         .mark-btn:hover {
             background: #D4AF37;
             color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
 
         .mark-btn.active {
             background: #D4AF37;
             color: #000;
+            border-color: #D4AF37;
+        }
+
+        .mark-btn[data-mark="◎"] {
+            border-color: #ff4444;
+        }
+
+        .mark-btn[data-mark="◎"]:hover,
+        .mark-btn[data-mark="◎"].active {
+            background: #ff4444;
+            border-color: #ff4444;
+        }
+
+        .mark-btn[data-mark="○"] {
+            border-color: #ffaa00;
+        }
+
+        .mark-btn[data-mark="○"]:hover,
+        .mark-btn[data-mark="○"].active {
+            background: #ffaa00;
+            border-color: #ffaa00;
+        }
+
+        .mark-btn[data-mark="▲"] {
+            border-color: #ff6600;
+        }
+
+        .mark-btn[data-mark="▲"]:hover,
+        .mark-btn[data-mark="▲"].active {
+            background: #ff6600;
+            border-color: #ff6600;
+        }
+
+        .mark-btn[data-mark="△"] {
+            border-color: #ffaa00;
+        }
+
+        .mark-btn[data-mark="△"]:hover,
+        .mark-btn[data-mark="△"].active {
+            background: #ffaa00;
+            border-color: #ffaa00;
+        }
+
+        .mark-btn[data-mark="★"] {
+            border-color: #ff0066;
+        }
+
+        .mark-btn[data-mark="★"]:hover,
+        .mark-btn[data-mark="★"].active {
+            background: #ff0066;
+            border-color: #ff0066;
         }
 
         .prediction-items {
@@ -113,11 +169,18 @@
         .prediction-item {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            padding: 15px;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding: 20px;
             background: #333;
-            border-radius: 8px;
+            border-radius: 10px;
+            border: 1px solid #555;
+            transition: all 0.3s ease;
+        }
+
+        .prediction-item:hover {
+            background: #3a3a3a;
+            border-color: #D4AF37;
         }
 
         .prediction-item:last-child {
@@ -125,18 +188,52 @@
         }
 
         .item-mark {
-            width: 50px;
+            width: 80px;
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
+            padding: 12px 15px;
+            border-radius: 8px;
+            background: #444;
+            border: 2px solid #666;
+            transition: all 0.3s ease;
+            min-height: 60px;
+            line-height: 1.2;
+        }
+
+        /* 印のサイズ設定 */
+        .item-mark option {
+            font-size: 1.4rem !important;
+            font-weight: bold !important;
+        }
+
+        /* 「○」のみを大きく表示 */
+        .item-mark option[value="○"] {
+            font-size: 3.6rem !important;
+            font-weight: bold !important;
         }
 
         .item-number {
-            width: 80px;
+            width: 90px;
+            background: #D4AF37;
+            color: #000;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            border: none;
+            font-size: 1.1rem;
+            min-height: 50px;
         }
 
         .item-name {
             flex: 1;
+            background: #444;
+            border: 1px solid #666;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            min-height: 50px;
         }
 
 
@@ -266,29 +363,38 @@
         .preview-item {
             display: flex;
             align-items: center;
-            padding: 12px 15px;
+            padding: 15px 20px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
+            border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .preview-mark {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: bold;
-            margin-right: 15px;
-            min-width: 25px;
+            margin-right: 20px;
+            min-width: 40px;
             text-align: center;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: #444;
+        }
+
+        /* プレビューでの「○」の特別なサイズ設定 */
+        .preview-mark:contains("○") {
+            font-size: 3.6rem;
         }
 
         .preview-number {
             background: #D4AF37;
             color: #000;
-            padding: 4px 8px;
-            border-radius: 4px;
+            padding: 8px 12px;
+            border-radius: 6px;
             font-weight: bold;
-            margin-right: 15px;
-            min-width: 35px;
+            margin-right: 20px;
+            min-width: 45px;
             text-align: center;
+            font-size: 1.1rem;
         }
 
         .preview-name {
@@ -298,7 +404,7 @@
             flex: 1;
         }
 
-        @media (max-width: 768px) {
+                @media (max-width: 768px) {
             .admin-container {
                 padding: 20px;
             }
@@ -309,12 +415,37 @@
                 gap: 10px;
             }
 
-                         .item-mark, .item-number, .item-name {
-                 width: 100%;
-             }
+            .item-mark, .item-number, .item-name {
+                width: 100%;
+            }
+
+            .item-mark {
+                width: 100%;
+                text-align: center;
+                font-size: 1.4rem;
+                min-height: 70px;
+                line-height: 1.2;
+            }
+
+            .item-number {
+                width: 100%;
+                text-align: center;
+                font-size: 1.2rem;
+                min-height: 60px;
+            }
 
             .btn-group {
                 flex-direction: column;
+            }
+
+            .prediction-marks {
+                justify-content: center;
+            }
+
+            .mark-btn {
+                min-width: 70px;
+                font-size: 1.1rem;
+                padding: 8px 15px;
             }
         }
     </style>
@@ -329,7 +460,7 @@
         <form id="prediction-form">
             <div class="form-group">
                 <label class="form-label">日付</label>
-                <input type="text" id="prediction-date" class="form-input" value="2025年1月27日" placeholder="例: 2025年1月27日">
+                <input type="date" id="prediction-date" class="form-input" value="2025-01-27">
             </div>
 
             <div class="form-group">
@@ -469,6 +600,9 @@
                  <button type="button" class="remove-item-btn">削除</button>
             `;
             container.appendChild(newItem);
+            
+            // 新しく追加された印のサイズを調整
+            adjustMarkSizes();
         });
 
         // 馬を削除する機能
@@ -483,12 +617,24 @@
             }
         });
 
+        // 日付を日本語形式に変換する関数
+        function formatDateToJapanese(dateString) {
+            if (!dateString) return '';
+            
+            const date = new Date(dateString);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            
+            return `${year}年${month}月${day}日`;
+        }
+
         // プレビュー機能
         document.getElementById('preview-btn').addEventListener('click', function() {
             const date = document.getElementById('prediction-date').value;
             const race = document.getElementById('prediction-race').value;
             
-            document.getElementById('preview-date').textContent = date;
+            document.getElementById('preview-date').textContent = formatDateToJapanese(date);
             document.getElementById('preview-race').textContent = race;
             
             const previewList = document.getElementById('preview-list');
@@ -515,32 +661,43 @@
             document.getElementById('preview-section').style.display = 'block';
         });
 
-        // 保存機能
+                // 保存機能
         document.getElementById('save-btn').addEventListener('click', function() {
-            const predictionData = {
-                date: document.getElementById('prediction-date').value,
-                race: document.getElementById('prediction-race').value,
-                predictions: []
-            };
-            
-                         const items = document.querySelectorAll('.prediction-item');
-             items.forEach(item => {
-                 const mark = item.querySelector('.item-mark').value;
-                 const number = item.querySelector('.item-number').value;
-                 const name = item.querySelector('.item-name').value;
-                 
-                 if (number && name) {
-                     predictionData.predictions.push({
-                         mark: mark,
-                         number: number,
-                         name: name
-                     });
-                 }
-             });
-            
-            // ローカルストレージに保存
-            localStorage.setItem('predictionData', JSON.stringify(predictionData));
-            alert('予想データを保存しました！');
+            try {
+                const predictionData = {
+                    date: formatDateToJapanese(document.getElementById('prediction-date').value),
+                    race: document.getElementById('prediction-race').value,
+                    predictions: []
+                };
+                
+                const items = document.querySelectorAll('.prediction-item');
+                items.forEach(item => {
+                    const mark = item.querySelector('.item-mark').value;
+                    const number = item.querySelector('.item-number').value;
+                    const name = item.querySelector('.item-name').value;
+                    
+                    if (number && name) {
+                        predictionData.predictions.push({
+                            mark: mark,
+                            number: number,
+                            name: name
+                        });
+                    }
+                });
+                
+                // ローカルストレージに保存
+                localStorage.setItem('predictionData', JSON.stringify(predictionData));
+                
+                // 保存完了メッセージ
+                alert('予想データを保存しました！\n\nメインサイトに反映されます。\n\n※スマホで確認する場合は、メインサイトを一度閉じてから再度開いてください。');
+                
+                // プレビューも更新
+                document.getElementById('preview-btn').click();
+                
+            } catch (error) {
+                console.error('保存エラー:', error);
+                alert('保存中にエラーが発生しました。');
+            }
         });
 
         // リセット機能
@@ -551,12 +708,42 @@
             }
         });
 
+        // 日本語形式の日付をHTML date input用に変換する関数
+        function formatJapaneseToDate(japaneseDate) {
+            if (!japaneseDate) return '';
+            
+            // "2025年1月27日" のような形式を "2025-01-27" に変換
+            const match = japaneseDate.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+            if (match) {
+                const year = match[1];
+                const month = match[2].padStart(2, '0');
+                const day = match[3].padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }
+            return '';
+        }
+
+                // 印のサイズを動的に調整する関数
+        function adjustMarkSizes() {
+            const markSelects = document.querySelectorAll('.item-mark');
+            markSelects.forEach(select => {
+                const options = select.querySelectorAll('option');
+                options.forEach(option => {
+                    if (option.value === '○') {
+                        option.style.fontSize = '3.6rem';
+                    } else {
+                        option.style.fontSize = '1.4rem';
+                    }
+                });
+            });
+        }
+
         // ページ読み込み時に保存されたデータを復元
         window.addEventListener('load', function() {
             const savedData = localStorage.getItem('predictionData');
             if (savedData) {
                 const data = JSON.parse(savedData);
-                document.getElementById('prediction-date').value = data.date;
+                document.getElementById('prediction-date').value = formatJapaneseToDate(data.date);
                 document.getElementById('prediction-race').value = data.race;
                 
                 // 予想データを復元
@@ -574,13 +761,16 @@
                             <option value="△" ${prediction.mark === '△' ? 'selected' : ''}>△</option>
                             <option value="★" ${prediction.mark === '★' ? 'selected' : ''}>★</option>
                         </select>
-                                                 <input type="text" class="form-input item-number" placeholder="馬番" value="${prediction.number}">
-                         <input type="text" class="form-input item-name" placeholder="馬名" value="${prediction.name}">
-                         <button type="button" class="remove-item-btn">削除</button>
+                         <input type="text" class="form-input item-number" placeholder="馬番" value="${prediction.number}">
+                          <input type="text" class="form-input item-name" placeholder="馬名" value="${prediction.name}">
+                          <button type="button" class="remove-item-btn">削除</button>
                     `;
                     container.appendChild(newItem);
                 });
             }
+            
+            // 印のサイズを調整
+            adjustMarkSizes();
         });
     </script>
 </body>
