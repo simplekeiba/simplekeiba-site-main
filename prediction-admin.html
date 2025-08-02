@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>予想管理画面 - シンプルKEIBA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .admin-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #D4AF37;
+        }
+
+        .admin-title {
+            font-size: 2.5rem;
+            color: #D4AF37;
+            margin-bottom: 10px;
+        }
+
+        .admin-subtitle {
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #D4AF37;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: #333;
+            border: 1px solid #555;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #D4AF37;
+        }
+
+        .prediction-marks {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .mark-btn {
+            padding: 8px 15px;
+            background: #333;
+            border: 1px solid #555;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .mark-btn:hover {
+            background: #D4AF37;
+            color: #000;
+        }
+
+        .mark-btn.active {
+            background: #D4AF37;
+            color: #000;
+        }
+
+        .prediction-items {
+            border: 1px solid #555;
+            border-radius: 10px;
+            padding: 20px;
+            background: #222;
+        }
+
+        .prediction-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #333;
+            border-radius: 8px;
+        }
+
+        .prediction-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-mark {
+            width: 50px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .item-number {
+            width: 80px;
+        }
+
+        .item-name {
+            flex: 1;
+        }
+
+
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #D4AF37;
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: #b8942a;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #555;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #666;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .add-item-btn {
+            background: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .add-item-btn:hover {
+            background: #218838;
+        }
+
+        .remove-item-btn {
+            background: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .remove-item-btn:hover {
+            background: #c82333;
+        }
+
+        .preview-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: #222;
+            border-radius: 15px;
+            border: 1px solid #555;
+        }
+
+        .preview-title {
+            color: #D4AF37;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .preview-container {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        .preview-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #D4AF37;
+        }
+
+        .preview-date {
+            font-size: 1.1rem;
+            color: #D4AF37;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .preview-race {
+            font-size: 1.3rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .preview-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .preview-mark {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-right: 15px;
+            min-width: 25px;
+            text-align: center;
+        }
+
+        .preview-number {
+            background: #D4AF37;
+            color: #000;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 15px;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        .preview-name {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 20px;
+            }
+
+            .prediction-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+                         .item-mark, .item-number, .item-name {
+                 width: 100%;
+             }
+
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1 class="admin-title">予想管理画面</h1>
+            <p class="admin-subtitle">今週の重賞予想を編集してください</p>
+        </div>
+
+        <form id="prediction-form">
+            <div class="form-group">
+                <label class="form-label">日付</label>
+                <input type="text" id="prediction-date" class="form-input" value="2025年1月27日" placeholder="例: 2025年1月27日">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">レース名</label>
+                <input type="text" id="prediction-race" class="form-input" value="第1回 東京大賞典" placeholder="例: 第1回 東京大賞典">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">予想印の説明</label>
+                <div class="prediction-marks">
+                    <button type="button" class="mark-btn" data-mark="◎">◎ (本命)</button>
+                    <button type="button" class="mark-btn" data-mark="○">○ (対抗)</button>
+                    <button type="button" class="mark-btn" data-mark="▲">▲ (単穴)</button>
+                    <button type="button" class="mark-btn" data-mark="△">△ (連対)</button>
+                    <button type="button" class="mark-btn" data-mark="★">★ (穴馬)</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">予想馬一覧</label>
+                <div class="prediction-items" id="prediction-items">
+                    <div class="prediction-item">
+                        <select class="form-input item-mark">
+                            <option value="◎">◎</option>
+                            <option value="○">○</option>
+                            <option value="▲">▲</option>
+                            <option value="△">△</option>
+                            <option value="★">★</option>
+                        </select>
+                        <input type="text" class="form-input item-number" placeholder="馬番" value="9">
+                                                 <input type="text" class="form-input item-name" placeholder="馬名" value="アメリカンピース">
+                         <button type="button" class="remove-item-btn">削除</button>
+                    </div>
+                    <div class="prediction-item">
+                        <select class="form-input item-mark">
+                            <option value="◎">◎</option>
+                            <option value="○" selected>○</option>
+                            <option value="▲">▲</option>
+                            <option value="△">△</option>
+                            <option value="★">★</option>
+                        </select>
+                        <input type="text" class="form-input item-number" placeholder="馬番" value="11">
+                                                 <input type="text" class="form-input item-name" placeholder="馬名" value="ホウオウエクレール">
+                         <button type="button" class="remove-item-btn">削除</button>
+                    </div>
+                    <div class="prediction-item">
+                        <select class="form-input item-mark">
+                            <option value="◎">◎</option>
+                            <option value="○">○</option>
+                            <option value="▲" selected>▲</option>
+                            <option value="△">△</option>
+                            <option value="★">★</option>
+                        </select>
+                        <input type="text" class="form-input item-number" placeholder="馬番" value="14">
+                                                 <input type="text" class="form-input item-name" placeholder="馬名" value="ロードプレイヤー">
+                         <button type="button" class="remove-item-btn">削除</button>
+                    </div>
+                    <div class="prediction-item">
+                        <select class="form-input item-mark">
+                            <option value="◎">◎</option>
+                            <option value="○">○</option>
+                            <option value="▲">▲</option>
+                            <option value="△" selected>△</option>
+                            <option value="★">★</option>
+                        </select>
+                        <input type="text" class="form-input item-number" placeholder="馬番" value="5">
+                                                 <input type="text" class="form-input item-name" placeholder="馬名" value="マグナレガリア">
+                         <button type="button" class="remove-item-btn">削除</button>
+                    </div>
+                    <div class="prediction-item">
+                        <select class="form-input item-mark">
+                            <option value="◎">◎</option>
+                            <option value="○">○</option>
+                            <option value="▲">▲</option>
+                            <option value="△" selected>△</option>
+                            <option value="★">★</option>
+                        </select>
+                        <input type="text" class="form-input item-number" placeholder="馬番" value="6">
+                                                 <input type="text" class="form-input item-name" placeholder="馬名" value="ヴラディア">
+                         <button type="button" class="remove-item-btn">削除</button>
+                    </div>
+                    <div class="prediction-item">
+                        <select class="form-input item-mark">
+                            <option value="◎">◎</option>
+                            <option value="○">○</option>
+                            <option value="▲">▲</option>
+                            <option value="△" selected>△</option>
+                            <option value="★">★</option>
+                        </select>
+                        <input type="text" class="form-input item-number" placeholder="馬番" value="7">
+                                                 <input type="text" class="form-input item-name" placeholder="馬名" value="コスモゴレアドール">
+                         <button type="button" class="remove-item-btn">削除</button>
+                    </div>
+                </div>
+                <button type="button" class="add-item-btn" id="add-item-btn">
+                    <i class="fas fa-plus"></i> 馬を追加
+                </button>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" id="preview-btn">プレビュー</button>
+                <button type="button" class="btn btn-secondary" id="save-btn">保存</button>
+                <button type="button" class="btn btn-danger" id="reset-btn">リセット</button>
+            </div>
+        </form>
+
+        <div class="preview-section" id="preview-section" style="display: none;">
+            <h3 class="preview-title">プレビュー</h3>
+            <div class="preview-container">
+                <div class="preview-header">
+                    <div class="preview-date" id="preview-date">2025年1月27日</div>
+                    <div class="preview-race" id="preview-race">第1回 東京大賞典</div>
+                </div>
+                <div class="preview-list" id="preview-list">
+                    <!-- プレビュー内容がここに動的に生成されます -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 馬を追加する機能
+        document.getElementById('add-item-btn').addEventListener('click', function() {
+            const container = document.getElementById('prediction-items');
+            const newItem = document.createElement('div');
+            newItem.className = 'prediction-item';
+            newItem.innerHTML = `
+                <select class="form-input item-mark">
+                    <option value="◎">◎</option>
+                    <option value="○">○</option>
+                    <option value="▲">▲</option>
+                    <option value="△" selected>△</option>
+                    <option value="★">★</option>
+                </select>
+                <input type="text" class="form-input item-number" placeholder="馬番">
+                                 <input type="text" class="form-input item-name" placeholder="馬名">
+                 <button type="button" class="remove-item-btn">削除</button>
+            `;
+            container.appendChild(newItem);
+        });
+
+        // 馬を削除する機能
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-item-btn')) {
+                const items = document.querySelectorAll('.prediction-item');
+                if (items.length > 1) {
+                    e.target.closest('.prediction-item').remove();
+                } else {
+                    alert('最低1頭は必要です');
+                }
+            }
+        });
+
+        // プレビュー機能
+        document.getElementById('preview-btn').addEventListener('click', function() {
+            const date = document.getElementById('prediction-date').value;
+            const race = document.getElementById('prediction-race').value;
+            
+            document.getElementById('preview-date').textContent = date;
+            document.getElementById('preview-race').textContent = race;
+            
+            const previewList = document.getElementById('preview-list');
+            previewList.innerHTML = '';
+            
+                         const items = document.querySelectorAll('.prediction-item');
+             items.forEach(item => {
+                 const mark = item.querySelector('.item-mark').value;
+                 const number = item.querySelector('.item-number').value;
+                 const name = item.querySelector('.item-name').value;
+                 
+                 if (number && name) {
+                     const previewItem = document.createElement('div');
+                     previewItem.className = 'preview-item';
+                     previewItem.innerHTML = `
+                         <span class="preview-mark">${mark}</span>
+                         <span class="preview-number">${number}</span>
+                         <span class="preview-name">${name}</span>
+                     `;
+                     previewList.appendChild(previewItem);
+                 }
+             });
+            
+            document.getElementById('preview-section').style.display = 'block';
+        });
+
+        // 保存機能
+        document.getElementById('save-btn').addEventListener('click', function() {
+            const predictionData = {
+                date: document.getElementById('prediction-date').value,
+                race: document.getElementById('prediction-race').value,
+                predictions: []
+            };
+            
+                         const items = document.querySelectorAll('.prediction-item');
+             items.forEach(item => {
+                 const mark = item.querySelector('.item-mark').value;
+                 const number = item.querySelector('.item-number').value;
+                 const name = item.querySelector('.item-name').value;
+                 
+                 if (number && name) {
+                     predictionData.predictions.push({
+                         mark: mark,
+                         number: number,
+                         name: name
+                     });
+                 }
+             });
+            
+            // ローカルストレージに保存
+            localStorage.setItem('predictionData', JSON.stringify(predictionData));
+            alert('予想データを保存しました！');
+        });
+
+        // リセット機能
+        document.getElementById('reset-btn').addEventListener('click', function() {
+            if (confirm('本当にリセットしますか？')) {
+                document.getElementById('prediction-form').reset();
+                document.getElementById('preview-section').style.display = 'none';
+            }
+        });
+
+        // ページ読み込み時に保存されたデータを復元
+        window.addEventListener('load', function() {
+            const savedData = localStorage.getItem('predictionData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                document.getElementById('prediction-date').value = data.date;
+                document.getElementById('prediction-race').value = data.race;
+                
+                // 予想データを復元
+                const container = document.getElementById('prediction-items');
+                container.innerHTML = '';
+                
+                data.predictions.forEach(prediction => {
+                    const newItem = document.createElement('div');
+                    newItem.className = 'prediction-item';
+                    newItem.innerHTML = `
+                        <select class="form-input item-mark">
+                            <option value="◎" ${prediction.mark === '◎' ? 'selected' : ''}>◎</option>
+                            <option value="○" ${prediction.mark === '○' ? 'selected' : ''}>○</option>
+                            <option value="▲" ${prediction.mark === '▲' ? 'selected' : ''}>▲</option>
+                            <option value="△" ${prediction.mark === '△' ? 'selected' : ''}>△</option>
+                            <option value="★" ${prediction.mark === '★' ? 'selected' : ''}>★</option>
+                        </select>
+                                                 <input type="text" class="form-input item-number" placeholder="馬番" value="${prediction.number}">
+                         <input type="text" class="form-input item-name" placeholder="馬名" value="${prediction.name}">
+                         <button type="button" class="remove-item-btn">削除</button>
+                    `;
+                    container.appendChild(newItem);
+                });
+            }
+        });
+    </script>
+</body>
+</html> 
