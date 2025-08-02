@@ -1500,13 +1500,21 @@
                 <h3 class="latest-episode-title">最新エピソード</h3>
                 <iframe 
                     class="spotify-embed"
-                    src="https://open.spotify.com/embed/episode/50QqNS0QtBs3IC6GP8gDnm?utm_source=generator" 
+                    src="https://open.spotify.com/embed/episode/3ZyINfSisZpTPOxoJPdfRB?utm_source=generator" 
                     width="100%" 
                     height="232" 
                     frameborder="0" 
                     allowfullscreen="" 
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 </iframe>
+                <div class="spotify-fallback" style="display: none; background: #1a1a1a; border-radius: 12px; padding: 20px; text-align: center; color: #ccc;">
+                    <p>Spotify埋め込みが読み込めませんでした。</p>
+                    <a href="https://open.spotify.com/episode/3ZyINfSisZpTPOxoJPdfRB?si=Y0iZaWeAR9m_Wb-sIluL8g" target="_blank" class="episode-btn spotify-btn" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #1DB954, #1ed760); color: #fff; text-decoration: none; padding: 12px 20px; border-radius: 25px; font-weight: 600; font-size: 0.9rem; margin-top: 15px;">
+                        <i class="fab fa-spotify"></i>
+                        Spotifyで聴く
+                    </a>
+                </div>
             </div>
         </div>
     </section>
