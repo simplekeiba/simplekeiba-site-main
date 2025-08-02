@@ -685,14 +685,21 @@
                     }
                 });
                 
-                // ローカルストレージに保存
-                localStorage.setItem('predictionData', JSON.stringify(predictionData));
+                // ローカルストレージに保存（複数回実行で確実に）
+                const dataString = JSON.stringify(predictionData);
+                localStorage.setItem('predictionData', dataString);
                 
                 // スマホでの更新を確実にする
                 ensureMobileUpdate();
                 
+                // 追加の保存確認
+                setTimeout(() => {
+                    localStorage.setItem('predictionData', dataString);
+                    console.log('保存確認:', localStorage.getItem('predictionData'));
+                }, 200);
+                
                 // 保存完了メッセージ
-                alert('予想データを保存しました！\n\nメインサイトに反映されます。\n\n※スマホで確認する場合は、メインサイトの「🔄 更新」ボタンを押すか、ページを再読み込みしてください。');
+                alert('予想データを保存しました！\n\nメインサイトに反映されます。\n\n※スマホでの確認方法：\n1. メインサイトの「🔄 更新」ボタンを押す\n2. ページを強制再読み込み（プルダウンリフレッシュ）\n3. ブラウザのキャッシュをクリアしてから再読み込み');
                 
                 // プレビューも更新
                 document.getElementById('preview-btn').click();
@@ -744,15 +751,18 @@
         // スマホでの更新を確実にするための機能
         function ensureMobileUpdate() {
             // 保存時に複数回の更新を実行
-            setTimeout(() => {
-                const savedData = localStorage.getItem('predictionData');
-                if (savedData) {
-                    localStorage.removeItem('predictionData');
-                    setTimeout(() => {
-                        localStorage.setItem('predictionData', savedData);
-                    }, 50);
-                }
-            }, 100);
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const savedData = localStorage.getItem('predictionData');
+                    if (savedData) {
+                        localStorage.removeItem('predictionData');
+                        setTimeout(() => {
+                            localStorage.setItem('predictionData', savedData);
+                            console.log(`更新実行 ${i + 1}/5`);
+                        }, 50);
+                    }
+                }, i * 100);
+            }
         }
 
         // ページ読み込み時に保存されたデータを復元

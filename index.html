@@ -1889,6 +1889,13 @@
         function forceRefreshPrediction() {
             console.log('強制更新実行'); // デバッグ用
             
+            // 複数回の更新を実行
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    loadPredictionData();
+                }, i * 100);
+            }
+            
             // ローカルストレージをクリアしてから再読み込み
             const savedData = localStorage.getItem('predictionData');
             if (savedData) {
@@ -1896,7 +1903,7 @@
                 setTimeout(() => {
                     localStorage.setItem('predictionData', savedData);
                     loadPredictionData();
-                }, 100);
+                }, 300);
             } else {
                 // データがない場合はデフォルトデータを表示
                 showDefaultPrediction();
@@ -1924,6 +1931,11 @@
             setTimeout(loadPredictionData, 100);
         });
 
+        // タッチエンドでも更新（スマホ対応）
+        document.addEventListener('touchend', function() {
+            setTimeout(loadPredictionData, 100);
+        });
+
         // スクロール時にも更新（スマホ対応）
         let scrollTimeout;
         window.addEventListener('scroll', function() {
@@ -1932,7 +1944,19 @@
         });
 
         // 定期的な更新（スマホ対応）
-        setInterval(loadPredictionData, 5000);
+        setInterval(loadPredictionData, 3000);
+
+        // ページの可視性変更時にも更新（スマホ対応）
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                setTimeout(loadPredictionData, 100);
+            }
+        });
+
+        // ウィンドウのリサイズ時にも更新（スマホ対応）
+        window.addEventListener('resize', function() {
+            setTimeout(loadPredictionData, 100);
+        });
 
         // 手動更新ボタンを追加（スマホ対応）
         const predictionSection = document.querySelector('.prediction-section');
