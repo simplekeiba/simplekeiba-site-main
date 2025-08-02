@@ -240,14 +240,10 @@
             transition: all 0.3s ease;
         }
 
-        .prediction-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #D4AF37;
-            transform: translateX(5px);
-        }
+
 
         .prediction-mark {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
             margin-right: 20px;
             min-width: 30px;
@@ -256,22 +252,27 @@
 
         .prediction-mark:contains("◎") {
             color: #ff4444;
+            font-size: 1.4rem;
         }
 
         .prediction-mark:contains("○") {
             color: #ffaa00;
+            font-size: 3.6rem;
         }
 
         .prediction-mark:contains("▲") {
             color: #ff6600;
+            font-size: 1.4rem;
         }
 
         .prediction-mark:contains("△") {
             color: #ffaa00;
+            font-size: 1.4rem;
         }
 
         .prediction-mark:contains("★") {
             color: #ff0066;
+            font-size: 1.4rem;
         }
 
         .horse-number {
@@ -291,6 +292,8 @@
             font-weight: 500;
             flex: 1;
         }
+
+
 
         /* パーソナリティセクション */
         .personality-section {
@@ -986,7 +989,7 @@
             }
 
             .prediction-mark {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
                 margin-right: 15px;
                 min-width: 25px;
             }
@@ -1196,7 +1199,7 @@
             }
 
             .prediction-mark {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
                 margin-right: 12px;
                 min-width: 22px;
             }
@@ -1791,33 +1794,56 @@
 
         // 予想データの読み込みと表示
         function loadPredictionData() {
-            const savedData = localStorage.getItem('predictionData');
-            if (savedData) {
-                const data = JSON.parse(savedData);
-                
-                // 日付とレース名を更新
-                document.getElementById('prediction-date').textContent = data.date;
-                document.getElementById('prediction-race').textContent = data.race;
-                
-                // 予想リストを更新
-                const predictionList = document.getElementById('prediction-list');
-                predictionList.innerHTML = '';
-                
-                                 data.predictions.forEach(prediction => {
-                     const predictionItem = document.createElement('div');
-                     predictionItem.className = 'prediction-item';
-                     predictionItem.innerHTML = `
-                         <span class="prediction-mark">${prediction.mark}</span>
-                         <span class="horse-number">${prediction.number}</span>
-                         <span class="horse-name">${prediction.name}</span>
-                     `;
-                     predictionList.appendChild(predictionItem);
-                 });
+            try {
+                const savedData = localStorage.getItem('predictionData');
+                if (savedData) {
+                    const data = JSON.parse(savedData);
+                    
+                    // 日付とレース名を更新
+                    const dateElement = document.getElementById('prediction-date');
+                    const raceElement = document.getElementById('prediction-race');
+                    
+                    if (dateElement && raceElement) {
+                        dateElement.textContent = data.date;
+                        raceElement.textContent = data.race;
+                    }
+                    
+                    // 予想リストを更新
+                    const predictionList = document.getElementById('prediction-list');
+                    if (predictionList) {
+                        predictionList.innerHTML = '';
+                        
+                        data.predictions.forEach(prediction => {
+                            const predictionItem = document.createElement('div');
+                            predictionItem.className = 'prediction-item';
+                            predictionItem.innerHTML = `
+                                <span class="prediction-mark">${prediction.mark}</span>
+                                <span class="horse-number">${prediction.number}</span>
+                                <span class="horse-name">${prediction.name}</span>
+                            `;
+                            predictionList.appendChild(predictionItem);
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('予想データの読み込みエラー:', error);
             }
         }
 
         // ページ読み込み時に予想データを読み込み
         window.addEventListener('load', loadPredictionData);
+        
+        // ページがフォーカスされた時にもデータを再読み込み（スマホ対応）
+        window.addEventListener('focus', loadPredictionData);
+        
+        // ページが表示された時にもデータを再読み込み（スマホ対応）
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                loadPredictionData();
+            }
+        });
+
+
     </script>
 </body>
 </html> 
