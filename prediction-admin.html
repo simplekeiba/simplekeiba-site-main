@@ -564,6 +564,7 @@
                 <button type="button" class="btn btn-primary" id="preview-btn">プレビュー</button>
                 <button type="button" class="btn btn-secondary" id="save-btn">保存</button>
                 <button type="button" class="btn btn-danger" id="reset-btn">リセット</button>
+                <button type="button" class="btn btn-primary" id="share-btn">スマホで共有</button>
             </div>
         </form>
 
@@ -698,8 +699,17 @@
                     console.log('保存確認:', localStorage.getItem('predictionData'));
                 }, 200);
                 
-                // 保存完了メッセージ
-                alert('予想データを保存しました！\n\nメインサイトに反映されます。\n\n※スマホでの確認方法：\n1. メインサイトの「🔄 更新」ボタンを押す\n2. ページを強制再読み込み（プルダウンリフレッシュ）\n3. ブラウザのキャッシュをクリアしてから再読み込み');
+                // 保存完了メッセージとURL共有
+                const shareUrl = `${window.location.origin}/index.html?predictionData=${encodeURIComponent(dataString)}`;
+                
+                alert(`予想データを保存しました！\n\nメインサイトに反映されます。\n\n※スマホでの確認方法：\n1. 以下のURLをコピーしてスマホで開く\n2. メインサイトの「🔄 更新」ボタンを押す\n3. ページを強制再読み込み（プルダウンリフレッシュ）\n\n共有URL:\n${shareUrl}`);
+                
+                // URLをクリップボードにコピー
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    console.log('URLをクリップボードにコピーしました');
+                }).catch(err => {
+                    console.error('クリップボードコピーエラー:', err);
+                });
                 
                 // プレビューも更新
                 document.getElementById('preview-btn').click();
@@ -715,6 +725,47 @@
             if (confirm('本当にリセットしますか？')) {
                 document.getElementById('prediction-form').reset();
                 document.getElementById('preview-section').style.display = 'none';
+            }
+        });
+
+        // スマホ共有機能
+        document.getElementById('share-btn').addEventListener('click', function() {
+            try {
+                const predictionData = {
+                    date: formatDateToJapanese(document.getElementById('prediction-date').value),
+                    race: document.getElementById('prediction-race').value,
+                    predictions: []
+                };
+                
+                const items = document.querySelectorAll('.prediction-item');
+                items.forEach(item => {
+                    const mark = item.querySelector('.item-mark').value;
+                    const number = item.querySelector('.item-number').value;
+                    const name = item.querySelector('.item-name').value;
+                    
+                    if (number && name) {
+                        predictionData.predictions.push({
+                            mark: mark,
+                            number: number,
+                            name: name
+                        });
+                    }
+                });
+                
+                const dataString = JSON.stringify(predictionData);
+                const shareUrl = `${window.location.origin}/index.html?predictionData=${encodeURIComponent(dataString)}`;
+                
+                // URLをクリップボードにコピー
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    alert(`スマホ共有URLをクリップボードにコピーしました！\n\nこのURLをスマホで開くと、予想データが直接反映されます。\n\nURL:\n${shareUrl}`);
+                }).catch(err => {
+                    console.error('クリップボードコピーエラー:', err);
+                    alert(`スマホ共有URL:\n\n${shareUrl}\n\nこのURLをコピーしてスマホで開いてください。`);
+                });
+                
+            } catch (error) {
+                console.error('共有エラー:', error);
+                alert('共有URLの生成中にエラーが発生しました。');
             }
         });
 

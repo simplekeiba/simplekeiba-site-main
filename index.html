@@ -1840,6 +1840,23 @@
             }
         }
 
+        // URLパラメータからデータを読み込む関数（スマホ対応）
+        function loadFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const predictionData = urlParams.get('predictionData');
+            
+            if (predictionData) {
+                try {
+                    const data = JSON.parse(decodeURIComponent(predictionData));
+                    localStorage.setItem('predictionData', JSON.stringify(data));
+                    console.log('URLからデータを読み込みました:', data);
+                    loadPredictionData();
+                } catch (error) {
+                    console.error('URLデータ読み込みエラー:', error);
+                }
+            }
+        }
+
         // デフォルト予想データを表示
         function showDefaultPrediction() {
             const dateElement = document.getElementById('prediction-date');
@@ -1913,6 +1930,10 @@
         // ページ読み込み時に予想データを読み込み
         window.addEventListener('load', function() {
             console.log('ページ読み込み完了'); // デバッグ用
+            
+            // URLパラメータからデータを読み込み（スマホ対応）
+            loadFromURL();
+            
             setTimeout(loadPredictionData, 100); // 少し遅延させて確実に実行
         });
         
