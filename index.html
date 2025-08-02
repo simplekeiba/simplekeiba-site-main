@@ -1796,6 +1796,8 @@
         function loadPredictionData() {
             try {
                 const savedData = localStorage.getItem('predictionData');
+                console.log('読み込みデータ:', savedData); // デバッグ用
+                
                 if (savedData) {
                     const data = JSON.parse(savedData);
                     
@@ -1804,8 +1806,8 @@
                     const raceElement = document.getElementById('prediction-race');
                     
                     if (dateElement && raceElement) {
-                        dateElement.textContent = data.date;
-                        raceElement.textContent = data.race;
+                        dateElement.textContent = data.date || '日付未設定';
+                        raceElement.textContent = data.race || 'レース名未設定';
                     }
                     
                     // 予想リストを更新
@@ -1813,25 +1815,80 @@
                     if (predictionList) {
                         predictionList.innerHTML = '';
                         
-                        data.predictions.forEach(prediction => {
-                            const predictionItem = document.createElement('div');
-                            predictionItem.className = 'prediction-item';
-                            predictionItem.innerHTML = `
-                                <span class="prediction-mark">${prediction.mark}</span>
-                                <span class="horse-number">${prediction.number}</span>
-                                <span class="horse-name">${prediction.name}</span>
-                            `;
-                            predictionList.appendChild(predictionItem);
-                        });
+                        if (data.predictions && Array.isArray(data.predictions)) {
+                            data.predictions.forEach(prediction => {
+                                const predictionItem = document.createElement('div');
+                                predictionItem.className = 'prediction-item';
+                                predictionItem.innerHTML = `
+                                    <span class="prediction-mark">${prediction.mark || '◎'}</span>
+                                    <span class="horse-number">${prediction.number || ''}</span>
+                                    <span class="horse-name">${prediction.name || ''}</span>
+                                `;
+                                predictionList.appendChild(predictionItem);
+                            });
+                        }
                     }
+                } else {
+                    console.log('保存されたデータが見つかりません');
+                    // デフォルトデータを表示
+                    showDefaultPrediction();
                 }
             } catch (error) {
                 console.error('予想データの読み込みエラー:', error);
+                // エラー時もデフォルトデータを表示
+                showDefaultPrediction();
+            }
+        }
+
+        // デフォルト予想データを表示
+        function showDefaultPrediction() {
+            const dateElement = document.getElementById('prediction-date');
+            const raceElement = document.getElementById('prediction-race');
+            const predictionList = document.getElementById('prediction-list');
+            
+            if (dateElement) dateElement.textContent = '2025年1月27日';
+            if (raceElement) raceElement.textContent = '第1回 東京大賞典';
+            
+            if (predictionList) {
+                predictionList.innerHTML = `
+                    <div class="prediction-item">
+                        <span class="prediction-mark">◎</span>
+                        <span class="horse-number">9</span>
+                        <span class="horse-name">アメリカンピース</span>
+                    </div>
+                    <div class="prediction-item">
+                        <span class="prediction-mark">○</span>
+                        <span class="horse-number">11</span>
+                        <span class="horse-name">ホウオウエクレール</span>
+                    </div>
+                    <div class="prediction-item">
+                        <span class="prediction-mark">▲</span>
+                        <span class="horse-number">14</span>
+                        <span class="horse-name">ロードプレイヤー</span>
+                    </div>
+                    <div class="prediction-item">
+                        <span class="prediction-mark">△</span>
+                        <span class="horse-number">5</span>
+                        <span class="horse-name">マグナレガリア</span>
+                    </div>
+                    <div class="prediction-item">
+                        <span class="prediction-mark">△</span>
+                        <span class="horse-number">6</span>
+                        <span class="horse-name">ヴラディア</span>
+                    </div>
+                    <div class="prediction-item">
+                        <span class="prediction-mark">△</span>
+                        <span class="horse-number">7</span>
+                        <span class="horse-name">コスモゴレアドール</span>
+                    </div>
+                `;
             }
         }
 
         // 強制更新機能（スマホ対応）
         function forceRefreshPrediction() {
+            console.log('強制更新実行'); // デバッグ用
+            
             // ローカルストレージをクリアしてから再読み込み
             const savedData = localStorage.getItem('predictionData');
             if (savedData) {
@@ -1840,11 +1897,17 @@
                     localStorage.setItem('predictionData', savedData);
                     loadPredictionData();
                 }, 100);
+            } else {
+                // データがない場合はデフォルトデータを表示
+                showDefaultPrediction();
             }
         }
 
         // ページ読み込み時に予想データを読み込み
-        window.addEventListener('load', loadPredictionData);
+        window.addEventListener('load', function() {
+            console.log('ページ読み込み完了'); // デバッグ用
+            setTimeout(loadPredictionData, 100); // 少し遅延させて確実に実行
+        });
         
         // ページがフォーカスされた時にもデータを再読み込み（スマホ対応）
         window.addEventListener('focus', loadPredictionData);
@@ -1890,6 +1953,7 @@
                 z-index: 10;
             `;
             refreshButton.addEventListener('click', function() {
+                console.log('手動更新ボタンクリック'); // デバッグ用
                 forceRefreshPrediction();
                 this.textContent = '✅ 更新済み';
                 setTimeout(() => {
@@ -1899,6 +1963,10 @@
             predictionSection.style.position = 'relative';
             predictionSection.appendChild(refreshButton);
         }
+
+        // スマホでのデバッグ用：コンソールログを表示
+        console.log('予想システム初期化完了');
+        console.log('ローカルストレージ状態:', localStorage.getItem('predictionData'));
 
 
     </script>
