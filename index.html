@@ -452,6 +452,69 @@
             word-break: keep-all;
         }
 
+        /* メッセージ募集セクション */
+        .message-request-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+        }
+
+        .message-request-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .message-request-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #D4AF37;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .message-request-theme {
+            background: linear-gradient(135deg, #ff4444, #ff6600);
+            color: #fff;
+            padding: 20px 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(255, 68, 68, 0.3);
+        }
+
+        .message-request-desc {
+            color: #ccc;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .message-request-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #D4AF37, #b8942a);
+            color: #000;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .message-request-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+        }
+
         /* おすすめエピソードセクション */
         .recommended-episodes-section {
             padding: 80px 0;
@@ -1163,6 +1226,31 @@
                 min-width: 90px;
             }
 
+            .message-request-container {
+                padding: 30px 20px;
+            }
+
+            .message-request-title {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+
+            .message-request-theme {
+                padding: 15px 20px;
+                font-size: 1.1rem;
+                margin: 20px 0;
+            }
+
+            .message-request-desc {
+                font-size: 1rem;
+                margin-bottom: 25px;
+            }
+
+            .message-request-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
             .philosophy-title {
                 padding: 15px 8px;
                 min-height: 70px;
@@ -1307,6 +1395,31 @@
                 min-width: 80px;
             }
 
+            .message-request-container {
+                padding: 25px 15px;
+            }
+
+            .message-request-title {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+            }
+
+            .message-request-theme {
+                padding: 12px 15px;
+                font-size: 1rem;
+                margin: 15px 0;
+            }
+
+            .message-request-desc {
+                font-size: 0.95rem;
+                margin-bottom: 20px;
+            }
+
+            .message-request-btn {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+            }
+
             .section-title {
                 font-size: 1.6rem;
                 padding: 0 8px;
@@ -1366,6 +1479,26 @@
                     allowfullscreen="" 
                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
                 </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- メッセージ募集セクション -->
+    <section class="message-request-section">
+        <div class="container">
+            <div class="message-request-container fade-in">
+                <h2 class="message-request-title">メッセージ募集中</h2>
+                <p class="message-request-desc">
+                    お寄せいただいたメッセージは番組内でご紹介させていただきます！
+                </p>
+                <div class="message-request-theme">
+                    8月のマンスリーテーマ<br>
+                    「秋に活躍を期待する馬は？」
+                </div>
+                <a href="https://forms.gle/DeqyczWJzmUbM3By9" target="_blank" class="message-request-btn">
+                    <i class="fas fa-comment"></i>
+                    メッセージを送る
+                </a>
             </div>
         </div>
     </section>
