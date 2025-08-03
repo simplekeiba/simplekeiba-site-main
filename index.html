@@ -38,7 +38,7 @@
     <meta property="og:site_name" content="シンプルKEIBA">
     <meta property="og:locale" content="ja_JP">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -48,14 +48,26 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #000;
-            color: #fff;
+            font-family: 'Noto Serif JP', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, serif;
+            background: #111;
+            background-image: url("assets/bg_luxury.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #f8f8f8;
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-text-size-adjust: 100%;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+        }
+
+        .luxury-bg {
+            background-color: #111;
+            background-image: url("assets/bg_luxury.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         .container {
@@ -137,6 +149,16 @@
             overflow-wrap: break-word;
         }
 
+        .sub-title {
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+            color: #d8c49e;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
         .hero-description {
             font-size: 1.1rem;
             color: #ccc;
@@ -216,14 +238,34 @@
             box-shadow: 0 10px 25px rgba(192, 192, 192, 0.3);
         }
 
+        .cta-button {
+            background: linear-gradient(135deg, #c49a6c, #8c6b4a);
+            color: #fff;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
 
 
 
+
+
+        section {
+            padding: 60px 20px;
+        }
 
         /* パーソナリティセクション */
         .personality-section {
             padding: 100px 0;
-            background: #000;
+            background: rgba(0,0,0,0.8);
         }
 
         .section-title {
@@ -886,6 +928,8 @@
             background: linear-gradient(135deg, #cc0000, #ff0000);
         }
 
+
+
         /* アニメーション */
         @keyframes fadeInUp {
             from {
@@ -1467,7 +1511,7 @@
         }
     </style>
 </head>
-<body>
+<body class="luxury-bg">
     <!-- ヒーローセクション -->
     <section class="hero">
         <div class="container">
@@ -1477,14 +1521,15 @@
                 </div>
                 <h1 class="hero-title">シンプルKEIBA</h1>
                 <p class="hero-subtitle">～難しくない競馬ラジオ～</p>
+                <p class="sub-title">A New Era of Horse Racing Podcast</p>
 
                 
                 <div class="platform-buttons">
-                    <a href="https://open.spotify.com/show/2jZYIbF0ZLL7vgsR0RHUR7" target="_blank" class="platform-btn spotify">
+                    <a href="https://open.spotify.com/show/2jZYIbF0ZLL7vgsR0RHUR7" target="_blank" class="platform-btn spotify cta-button">
                         <i class="fab fa-spotify"></i>
                         Spotify
                     </a>
-                    <a href="https://podcasts.apple.com/jp/podcast/%E3%82%B7%E3%83%B3%E3%83%97%E3%83%ABkeiba-%E9%9B%A3%E3%81%97%E3%81%8F%E3%81%AA%E3%81%84%E7%AB%B6%E9%A6%AC%E3%83%A9%E3%82%B8%E3%82%AA/id1734404201" target="_blank" class="platform-btn apple">
+                    <a href="https://podcasts.apple.com/jp/podcast/%E3%82%B7%E3%83%B3%E3%83%97%E3%83%ABkeiba-%E9%9B%A3%E3%81%97%E3%81%8F%E3%81%AA%E3%81%84%E7%AB%B6%E9%A6%AC%E3%83%A9%E3%82%B8%E3%82%AA/id1734404201" target="_blank" class="platform-btn apple cta-button">
                         <i class="fab fa-apple"></i>
                         Apple Podcast
                     </a>
@@ -1510,21 +1555,18 @@
                 <p style="text-align: center; color: #ccc; margin-bottom: 20px; font-size: 0.9rem;">
                     【リバティアイランド特集】記憶に生きる三冠牝馬 ～多くのファンに愛されたお嬢さん～
                 </p>
-                <iframe 
-                    class="spotify-embed"
-                    src="https://open.spotify.com/embed/episode/50QqNS0QtBs3IC6GP8gDnm?utm_source=generator" 
-                    width="100%" 
-                    height="232" 
-                    frameborder="0" 
-                    allowfullscreen="" 
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                </iframe>
-                <div class="spotify-fallback" style="display: none; background: #1a1a1a; border-radius: 12px; padding: 20px; text-align: center; color: #ccc;">
-                    <p>Spotify埋め込みが読み込めませんでした。</p>
-                    <a href="https://open.spotify.com/episode/50QqNS0QtBs3IC6GP8gDnm" target="_blank" class="episode-btn spotify-btn" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #1DB954, #1ed760); color: #fff; text-decoration: none; padding: 12px 20px; border-radius: 25px; font-weight: 600; font-size: 0.9rem; margin-top: 15px;">
+                <div class="spotify-fallback" style="display: block; background: rgba(26,26,26,0.9); border-radius: 12px; padding: 30px; text-align: center; color: #ccc; backdrop-filter: blur(10px);">
+                    <p style="margin-bottom: 20px; font-size: 1.1rem;">最新エピソード #117</p>
+                    <p style="margin-bottom: 25px; color: #d8c49e; font-size: 0.9rem;">【リバティアイランド特集】記憶に生きる三冠牝馬</p>
+                    <p style="margin-bottom: 30px; color: #ccc; font-size: 0.85rem; line-height: 1.8;">
+                        7月30日──あの日デビューした名馬。新潟競馬場で披露された異次元の末脚。圧倒的強さで獲得した牝馬三冠。超良血。日本中を魅了した「お嬢さん」ことリバティアイランド。<br><br>
+                        JRA史上最速タイの31.4秒の末脚。桜花賞・オークス・秋華賞の圧巻の三冠制覇。ジャパンカップで世界一イクイノックスとの名勝負。川田騎手との深い絆。静寂を呼びかけたオークス。<br><br>
+                        突然訪れた悲劇。彼女の最期をただ悲しむだけで終わらせないために。「思い出は、語り継げば生き続ける」。<br><br>
+                        推しは推せるときに推す。そして推した馬のことを忘れずに語っていこう。リバティアイランド追悼と感謝の回です。
+                    </p>
+                    <a href="https://open.spotify.com/episode/50QqNS0QtBs3IC6GP8gDnm" target="_blank" class="episode-btn spotify-btn cta-button" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #1DB954, #1ed760); color: #fff; text-decoration: none; padding: 12px 20px; border-radius: 25px; font-weight: 600; font-size: 0.9rem; margin-top: 15px;">
                         <i class="fab fa-spotify"></i>
-                        Spotifyで聴く
+                        最新エピソードを聴く
                     </a>
                 </div>
             </div>
@@ -1826,6 +1868,19 @@
                 }
             });
         });
+
+        // Spotify埋め込みのデバッグ
+        const spotifyIframe = document.querySelector('.spotify-embed');
+        if (spotifyIframe) {
+            spotifyIframe.addEventListener('load', function() {
+                console.log('Spotify埋め込みが正常に読み込まれました');
+            });
+            spotifyIframe.addEventListener('error', function() {
+                console.log('Spotify埋め込みでエラーが発生しました');
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'block';
+            });
+        }
 
 
 
