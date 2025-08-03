@@ -1494,13 +1494,25 @@
     </section>
 
     <!-- 最新エピソードセクション -->
+    <!-- 
+    最新エピソードの更新方法：
+    1. https://open.spotify.com/show/2jZYIbF0ZLL7vgsR0RHUR7 で最新エピソードを確認
+    2. エピソードURLからIDを取得（例：https://open.spotify.com/episode/XXXXX → XXXXX）
+    3. 以下のURLを更新：
+       - src="https://open.spotify.com/embed/episode/[エピソードID]?utm_source=generator"
+       - href="https://open.spotify.com/episode/[エピソードID]?si=..."
+    4. タイトルを「最新エピソード (#XXX)」に更新
+    -->
     <section class="latest-episode-section">
         <div class="container">
             <div class="latest-episode-container fade-in">
-                <h3 class="latest-episode-title">最新エピソード</h3>
+                <h3 class="latest-episode-title">最新エピソード (#117)</h3>
+                <p style="text-align: center; color: #ccc; margin-bottom: 20px; font-size: 0.9rem;">
+                    【リバティアイランド特集】記憶に生きる三冠牝馬 ～多くのファンに愛されたお嬢さん～
+                </p>
                 <iframe 
                     class="spotify-embed"
-                    src="https://open.spotify.com/embed/episode/3ZyINfSisZpTPOxoJPdfRB?utm_source=generator" 
+                    src="https://open.spotify.com/embed/episode/50QqNS0QtBs3IC6GP8gDnm?utm_source=generator" 
                     width="100%" 
                     height="232" 
                     frameborder="0" 
@@ -1510,7 +1522,7 @@
                 </iframe>
                 <div class="spotify-fallback" style="display: none; background: #1a1a1a; border-radius: 12px; padding: 20px; text-align: center; color: #ccc;">
                     <p>Spotify埋め込みが読み込めませんでした。</p>
-                    <a href="https://open.spotify.com/episode/3ZyINfSisZpTPOxoJPdfRB?si=Y0iZaWeAR9m_Wb-sIluL8g" target="_blank" class="episode-btn spotify-btn" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #1DB954, #1ed760); color: #fff; text-decoration: none; padding: 12px 20px; border-radius: 25px; font-weight: 600; font-size: 0.9rem; margin-top: 15px;">
+                    <a href="https://open.spotify.com/episode/50QqNS0QtBs3IC6GP8gDnm" target="_blank" class="episode-btn spotify-btn" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #1DB954, #1ed760); color: #fff; text-decoration: none; padding: 12px 20px; border-radius: 25px; font-weight: 600; font-size: 0.9rem; margin-top: 15px;">
                         <i class="fab fa-spotify"></i>
                         Spotifyで聴く
                     </a>
@@ -1540,7 +1552,7 @@
     </section>
 
     <!-- おすすめエピソードセクション -->
-    <section class="recommended-episodes-section">
+    <section class="recommended-episodes-section" id="recommended-episodes">
         <div class="container">
             <h2 class="section-title fade-in">おすすめエピソード</h2>
             <div class="episodes-grid">
