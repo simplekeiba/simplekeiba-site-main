@@ -270,7 +270,7 @@
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 60px;
             color: #D4AF37;
@@ -288,7 +288,7 @@
         }
 
         .philosophy-title h2 {
-            font-size: 3rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: #D4AF37;
             margin: 0;
@@ -528,19 +528,21 @@
             background: #000;
         }
 
-        .message-request-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
-            border: 1px solid #333;
+        /* 高級感ある背景装飾 */
+        .message-card {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px);
+            border: 1px solid #d4af37;
             border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 40px 30px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
             text-align: center;
         }
 
         .message-request-title {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
             color: #D4AF37;
             margin-bottom: 30px;
@@ -569,25 +571,47 @@
             margin-bottom: 30px;
         }
 
-        .message-request-btn {
+        /* マンスリーラベルとテーマ文 */
+        .monthly-label {
+            font-size: 0.9rem;
+            color: #ccc;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .theme-text {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.69rem;
+            font-weight: bold;
+            color: #f8f8f8;
+            margin-bottom: 30px;
+        }
+
+        /* ゴールドボタン */
+        .gold-button {
+            background: linear-gradient(to right, #e6c87a, #b68d40);
+            color: #000;
+            font-weight: bold;
+            padding: 14px 28px;
+            border-radius: 50px;
+            border: none;
+            box-shadow: 0 6px 12px rgba(212, 175, 55, 0.4);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: linear-gradient(135deg, #D4AF37, #b8942a);
-            color: #000;
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
 
-        .message-request-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+        .gold-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(212, 175, 55, 0.6);
         }
+
+
 
         /* おすすめエピソードセクション */
         .recommended-episodes-section {
@@ -810,6 +834,56 @@
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
             background: linear-gradient(135deg, #b8942a, #D4AF37);
+        }
+
+        /* 高級感あるメールカード */
+        .email-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid #d4af37;
+            border-radius: 12px;
+            color: #f8f8f8;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+            min-height: 52px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .email-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .email-card:hover::before {
+            left: 100%;
+        }
+
+        .email-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+            border-color: #e6c87a;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .email-card i {
+            color: #d4af37;
+            font-size: 1.2rem;
         }
 
         /* YouTubeチャンネルセクション */
@@ -1058,7 +1132,7 @@
             }
 
             .section-title {
-                font-size: 2rem;
+                font-size: 1.6rem;
                 margin-bottom: 40px;
                 padding: 0 15px;
             }
@@ -1108,7 +1182,7 @@
             }
 
             .philosophy-title h2 {
-                font-size: 2.2rem;
+                font-size: 1.6rem;
                 letter-spacing: 1px;
             }
 
@@ -1156,6 +1230,11 @@
 
             .contact-email {
                 padding: 14px 28px;
+                font-size: 1rem;
+            }
+
+            .email-card {
+                padding: 16px 32px;
                 font-size: 1rem;
             }
 
@@ -1268,7 +1347,7 @@
             }
 
             .section-title {
-                font-size: 1.8rem;
+                font-size: 1.4rem;
                 margin-bottom: 30px;
                 padding: 0 10px;
             }
@@ -1302,12 +1381,13 @@
                 min-width: 90px;
             }
 
-            .message-request-container {
+            .message-card {
                 padding: 30px 20px;
+                max-width: 500px;
             }
 
             .message-request-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
                 margin-bottom: 20px;
             }
 
@@ -1322,7 +1402,16 @@
                 margin-bottom: 25px;
             }
 
-            .message-request-btn {
+            .monthly-label {
+                font-size: 0.8rem;
+            }
+
+            .theme-text {
+                font-size: 1.43rem;
+                margin-bottom: 25px;
+            }
+
+            .gold-button {
                 padding: 12px 25px;
                 font-size: 1rem;
             }
@@ -1334,7 +1423,7 @@
             }
 
             .philosophy-title h2 {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
                 letter-spacing: 0.3px;
             }
 
@@ -1383,6 +1472,11 @@
 
             .contact-email {
                 padding: 12px 24px;
+                font-size: 0.95rem;
+            }
+
+            .email-card {
+                padding: 14px 28px;
                 font-size: 0.95rem;
             }
 
@@ -1471,12 +1565,13 @@
                 min-width: 80px;
             }
 
-            .message-request-container {
+            .message-card {
                 padding: 25px 15px;
+                max-width: 450px;
             }
 
             .message-request-title {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
                 margin-bottom: 15px;
             }
 
@@ -1491,13 +1586,22 @@
                 margin-bottom: 20px;
             }
 
-            .message-request-btn {
+            .monthly-label {
+                font-size: 0.75rem;
+            }
+
+            .theme-text {
+                font-size: 1.3rem;
+                margin-bottom: 20px;
+            }
+
+            .gold-button {
                 padding: 10px 20px;
                 font-size: 0.95rem;
             }
 
             .section-title {
-                font-size: 1.6rem;
+                font-size: 1.2rem;
                 padding: 0 8px;
             }
         }
@@ -1661,18 +1765,16 @@
     <!-- メッセージ募集セクション -->
     <section class="message-request-section">
         <div class="container">
-            <div class="message-request-container fade-in">
-                <h2 class="message-request-title">メッセージ募集中</h2>
+            <h2 class="section-title fade-in">📩 MESSAGE TO THE SHOW</h2>
+            <div class="message-card fade-in">
                 <p class="message-request-desc">
-                    お寄せいただいたメッセージは番組内でご紹介させていただきます！
+                    メッセージ募集中！
                 </p>
-                <div class="message-request-theme">
-                    8月のマンスリーテーマ<br>
-                    「秋に活躍を期待する馬は？」
-                </div>
-                <a href="https://forms.gle/DeqyczWJzmUbM3By9" target="_blank" class="message-request-btn">
+                <p class="monthly-label">MONTHLY THEME – AUGUST</p>
+                <p class="theme-text">「秋に活躍を期待する馬は？」</p>
+                <a href="https://forms.gle/DeqyczWJzmUbM3By9" target="_blank" class="gold-button">
                     <i class="fas fa-envelope"></i>
-                    メッセージを送る
+                    <strong>メッセージを送る</strong>
                 </a>
             </div>
         </div>
@@ -1681,7 +1783,7 @@
     <!-- パーソナリティセクション -->
     <section class="personality-section">
         <div class="container">
-            <h2 class="section-title fade-in">パーソナリティ</h2>
+            <h2 class="section-title fade-in">Personality</h2>
             <div class="personality-grid">
                 <div class="personality-card fade-in">
                     <div class="personality-avatar">
@@ -1774,7 +1876,7 @@
     <section class="youtube-section">
         <div class="container">
             <div class="youtube-content fade-in">
-                <h2 class="section-title">YouTubeチャンネル</h2>
+                <h2 class="section-title">Original Sound</h2>
                 <div class="youtube-container">
                     <a href="https://www.youtube.com/watch?v=IwEnM2jCksE" target="_blank" class="youtube-link">
                         <div class="youtube-thumbnail">
@@ -1804,14 +1906,16 @@
     <section class="contact-section">
         <div class="container">
             <div class="contact-content fade-in">
-                <h2 class="section-title">お問い合わせ・コラボレーションのご依頼</h2>
+                <h2 class="section-title">
+                    <i class="fa fa-envelope" aria-hidden="true"></i> Business Inquiries
+                </h2>
                 <div class="contact-info">
                     <div class="contact-icon">
                         <i class="fas fa-envelope"></i>
                     </div>
-                    <p class="contact-text">ご質問やコラボレーションのご依頼がございましたら、お気軽にお問い合わせください。</p>
-                    <a href="mailto:simplekeiba123@gmail.com" class="contact-email">
-                        <i class="fas fa-envelope"></i>
+                    <p class="contact-text">番組へのご意見・ご質問、コラボレーションのご相談は下記メールアドレスまでお気軽にご連絡ください。</p>
+                    <a href="mailto:simplekeiba123@gmail.com" class="email-card">
+                        <i class="fa fa-envelope"></i>
                         simplekeiba123@gmail.com
                     </a>
                 </div>
