@@ -548,14 +548,18 @@
         }
 
         .message-request-theme {
-            background: linear-gradient(135deg, #ff4444, #ff6600);
-            color: #fff;
-            padding: 20px 30px;
-            border-radius: 15px;
+            background: #111;
+            border: 2.5px solid #d8c49e;
+            color: #d8c49e;
+            padding: 28px 30px;
+            border-radius: 18px;
             margin: 30px 0;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            box-shadow: 0 5px 15px rgba(255, 68, 68, 0.3);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.10);
+            text-align: center;
+            letter-spacing: 1px;
+            line-height: 1.7;
         }
 
         .message-request-desc {
@@ -1548,55 +1552,12 @@
        - href="https://open.spotify.com/episode/[エピソードID]?si=..."
     4. タイトルを「最新エピソード (#XXX)」に更新
     -->
-    <section class="latest-episode-section">
-        <div class="container">
-            <div class="latest-episode-container fade-in">
-                <h3 class="latest-episode-title">最新エピソード (#117)</h3>
-                <p style="text-align: center; color: #ccc; margin-bottom: 20px; font-size: 0.9rem;">
-                    【リバティアイランド特集】記憶に生きる三冠牝馬 ～多くのファンに愛されたお嬢さん～
-                </p>
-                <div class="spotify-fallback" style="display: block; background: rgba(26,26,26,0.9); border-radius: 12px; padding: 30px; text-align: center; color: #ccc; backdrop-filter: blur(10px);">
-                    <p style="margin-bottom: 20px; font-size: 1.1rem;">最新エピソード #117</p>
-                    <p style="margin-bottom: 25px; color: #d8c49e; font-size: 0.9rem;">【リバティアイランド特集】記憶に生きる三冠牝馬</p>
-                    <p style="margin-bottom: 30px; color: #ccc; font-size: 0.85rem; line-height: 1.8;">
-                        7月30日──あの日デビューした名馬。新潟競馬場で披露された異次元の末脚。圧倒的強さで獲得した牝馬三冠。超良血。日本中を魅了した「お嬢さん」ことリバティアイランド。<br><br>
-                        JRA史上最速タイの31.4秒の末脚。桜花賞・オークス・秋華賞の圧巻の三冠制覇。ジャパンカップで世界一イクイノックスとの名勝負。川田騎手との深い絆。静寂を呼びかけたオークス。<br><br>
-                        突然訪れた悲劇。彼女の最期をただ悲しむだけで終わらせないために。「思い出は、語り継げば生き続ける」。<br><br>
-                        推しは推せるときに推す。そして推した馬のことを忘れずに語っていこう。リバティアイランド追悼と感謝の回です。
-                    </p>
-                    <a href="https://open.spotify.com/episode/50QqNS0QtBs3IC6GP8gDnm" target="_blank" class="episode-btn spotify-btn cta-button" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #1DB954, #1ed760); color: #fff; text-decoration: none; padding: 12px 20px; border-radius: 25px; font-weight: 600; font-size: 0.9rem; margin-top: 15px;">
-                        <i class="fab fa-spotify"></i>
-                        最新エピソードを聴く
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- メッセージ募集セクション -->
-    <section class="message-request-section">
-        <div class="container">
-            <div class="message-request-container fade-in">
-                <h2 class="message-request-title">メッセージ募集中</h2>
-                <p class="message-request-desc">
-                    お寄せいただいたメッセージは番組内でご紹介させていただきます！
-                </p>
-                <div class="message-request-theme">
-                    8月のマンスリーテーマ<br>
-                    「秋に活躍を期待する馬は？」
-                </div>
-                <a href="https://forms.gle/DeqyczWJzmUbM3By9" target="_blank" class="message-request-btn">
-                    <i class="fas fa-comment"></i>
-                    メッセージを送る
-                </a>
-            </div>
-        </div>
-    </section>
 
     <!-- おすすめエピソードセクション -->
     <section class="recommended-episodes-section" id="recommended-episodes">
         <div class="container">
-            <h2 class="section-title fade-in">おすすめエピソード</h2>
+            <h2 class="section-title fade-in">Episode</h2>
             <div class="episodes-grid">
                 <div class="episode-card fade-in">
                     <div class="episode-number">#115</div>
@@ -1693,6 +1654,26 @@
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- メッセージ募集セクション -->
+    <section class="message-request-section">
+        <div class="container">
+            <div class="message-request-container fade-in">
+                <h2 class="message-request-title">メッセージ募集中</h2>
+                <p class="message-request-desc">
+                    お寄せいただいたメッセージは番組内でご紹介させていただきます！
+                </p>
+                <div class="message-request-theme">
+                    8月のマンスリーテーマ<br>
+                    「秋に活躍を期待する馬は？」
+                </div>
+                <a href="https://forms.gle/DeqyczWJzmUbM3By9" target="_blank" class="message-request-btn">
+                    <i class="fas fa-envelope"></i>
+                    メッセージを送る
+                </a>
             </div>
         </div>
     </section>
